@@ -1,0 +1,22 @@
+library(xts)
+#Source of JGB curve
+source.jgb <- NULL
+source.jgb[[length(source.jgb) + 1]] <- "http://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv"
+source.jgb[[length(source.jgb) + 1]] <- "http://www.mof.go.jp/jgbs/reference/interest_rate/jgbcm.csv"
+source.jgb
+#From Japanese era To ChristianEra
+ToChristianEra <- function(x)
+{
+  era  <- substr(x, 1, 1)
+  year <- as.numeric(substr(x, 2, nchar(x)))
+  if(era == "H"){
+    year <- year + 1988
+  }else if(era == "S"){
+    year <- year + 1925
+  }
+  as.character(year)
+}
+ToChristianEra
+theUrl<-"http://www.mof.go.jp/jgbs/reference/interest_rate/data/jgbcm_all.csv"
+tomato <- read.table(file=theUrl,header=TRUE,sep=",")
+tomato
